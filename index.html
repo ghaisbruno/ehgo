@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My first page in GO</title>
+</head>
+
+<body>
+    <h1>Here we GO!</h1>
+    <nav><button onclick="location.href='/teste'">Teste</button></nav>
+    <br>
+    <h2>Sign in</h2>
+    <div>
+        <form method="POST" action="/login">
+            <label>
+                Username:
+                <input name="username" type="text" placeholder="username" required>
+            </label>
+            <br>
+            <label>
+                Password :
+                <input name="password" type="password" name="" id="" placeholder="password" required>
+            </label>
+            <br>
+            <br>
+            <label>
+                <input type="submit" value="Submit">
+            </label>
+            <br>
+        </form>
+        <br>
+        <input type="file" onchange="read()"/>
+    </div>
+</body>
+<script>
+    function read() {
+        var file = (document.querySelector('input[type="file"]')).files.item(0).name;
+    }
+</script>
+
+</html>
