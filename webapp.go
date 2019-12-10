@@ -58,10 +58,10 @@ func login(w http.ResponseWriter, r *http.Request) {
 			fmt.Printf("\nPasssou, user tá safe\n")
 			http.Redirect(w, r, "/txt", 302)
 		} else {
-			http.ServeFile(w, r, "index.html")
+			http.Redirect(w, r, "/", 301)
 		}
 	} else if r.Method == "GET" {
-		http.ServeFile(w, r, "index.html")
+		http.Redirect(w, r, "/", 301)
 	}
 
 }
