@@ -1,20 +1,22 @@
 package main
 
 import (
-	"crypto/sha1"
-	"encoding/base64"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 )
 
+// Page : Creates a simple WebPage
 type Page struct {
 	Title string
 	Body  []byte
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
+	// if r.Method == "POST" {
+
+	// }
 	p1 := &Page{Title: "TestPage", Body: []byte("This is a simple page")}
 	p1.save()
 	p2, _ := loadPage("TestPage.txt")
@@ -47,29 +49,10 @@ func index(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "index.html")
 }
 
-func login(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "POST" {
-		user := r.PostFormValue("username")
-		hasher := sha1.New()
-		pss := []byte(r.PostFormValue("password"))
-		hasher.Write(pss)
-		pass := base64.URLEncoding.EncodeToString(hasher.Sum(nil))
-		if user == "a@a.com" && pass == "hvfkN_qlp_zhXR3cuerq6jd2Z7g=" {
-			fmt.Printf("\nPasssou, user tá safe\n")
-			http.Redirect(w, r, "/txt", 302)
-		} else {
-			http.Redirect(w, r, "/", 301)
-		}
-	} else if r.Method == "GET" {
-		http.Redirect(w, r, "/", 301)
-	}
-
-}
-
 func main() {
 	http.HandleFunc("/", index)
-	http.HandleFunc("/txt", handler)
 	http.HandleFunc("/teste", test)
+	http.HandleFunc("/txt", handler)
 	http.HandleFunc("/login", login)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":80", nil))
 }
